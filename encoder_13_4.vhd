@@ -23,6 +23,6 @@ l1: data_out <= "0000" when data_in(0) = '1' else
                 "1010" when data_in(10) = '1' else
                 "1011" when data_in(11) = '1' else
                 "1100" when data_in(12) = '1' else
-                "ZZZZ";
+                "1111";
 
 end Behavioral;

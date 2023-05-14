@@ -10,7 +10,9 @@ end door_open_timer;
 architecture Behavioral of door_open_timer is
 
 type state_t is (IDLE, ST1, ST2, ST3, ST4, ST5);
-signal state, next_state: state_t;
+signal state: state_t := IDLE;
+signal next_state: state_t;
+signal iac: std_logic := '0';
 begin
 
 update_state: process(clk, start)
@@ -23,18 +25,20 @@ end process update_state;
 
 transitions: process(state)
 begin
-    active <= '0';
+    iac <= '0';
     case state is
         when IDLE => 
             if start = '1' then next_state <= ST1;
             else next_state <= IDLE;
             end if;
-        when ST1 => active <= '1'; next_state <= ST2;
-        when ST2 => active <= '1'; next_state <= ST3;
-        when ST3 => active <= '1'; next_state <= ST4;
-        when ST4 => active <= '1'; next_state <= ST5;
-        when ST5 => active <= '1'; next_state <= IDLE;
+        when ST1 => iac <= '1'; next_state <= ST2;
+        when ST2 => iac <= '1'; next_state <= ST3;
+        when ST3 => iac <= '1'; next_state <= ST4;
+        when ST4 => iac <= '1'; next_state <= ST5;
+        when ST5 => iac <= '1'; next_state <= IDLE;
     end case; 
 end process transitions;
+
+active <= iac;
 
 end Behavioral;

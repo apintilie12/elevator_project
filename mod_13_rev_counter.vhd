@@ -26,13 +26,13 @@ begin
                     if next_q < 12 then
                         next_q <= next_q + 1;
                     else
-                        next_q <= "0000";
+                        next_q <= next_q;
                     end if;
                 else
                     if next_q > 0 then
                         next_q <= next_q - 1;
                     else
-                        next_q <= "1100";
+                        next_q <= next_q;
                     end if;
                 end if;
             end if;
